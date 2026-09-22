@@ -93,6 +93,9 @@ html.page-leaving {
 /* =========================================================
    Scroll progress bar — fills left to right as the visitor
    scrolls down the single-page site (see assets/js/main.js).
+   z-index is set to the maximum possible value so it always
+   wins the stacking fight against the sticky, blurred header
+   and stays visible while scrolling down, not just at the top.
    ========================================================= */
 .scroll-progress {
   position: fixed;
@@ -102,7 +105,8 @@ html.page-leaving {
   height: 4px;
   background: var(--accent);
   box-shadow: 0 0 8px var(--accent-glow);
-  z-index: 999;
+  z-index: 2147483647;
+  pointer-events: none;
   transition: width 0.1s linear;
 }
 
@@ -464,7 +468,7 @@ section {
   padding-bottom: 0;
 }
 
-/* Centered page intro variant (Skills/Services) */
+/* Centered page intro variant (Skills/Services, Certificates & Courses) */
 .page-header-center .container {
   text-align: center;
 }
@@ -475,7 +479,8 @@ section {
 
 .page-header-center h1,
 .page-header-center h4,
-.page-header-center h5 {
+.page-header-center h5,
+.page-header-center p {
   margin-left: auto;
   margin-right: auto;
 }
@@ -733,6 +738,11 @@ section {
    ========================================================= */
 .section-preview {
   border-bottom: 1px solid var(--line);
+}
+
+/* Centered variant — used for "Also Skilled In" */
+.section-preview-center .container {
+  text-align: center;
 }
 
 .preview-cards {
@@ -1480,6 +1490,35 @@ section {
 }
 
 /* =========================================================
+   WhatsApp floating button
+   ========================================================= */
+.whatsapp-float {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  width: 56px;
+  height: 56px;
+  background: #25D366;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+  z-index: 998; /* below the scroll progress bar, above everything else */
+  transition: transform 0.2s var(--ease);
+}
+
+.whatsapp-float:hover {
+  transform: scale(1.08);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .whatsapp-float {
+    transition: none;
+  }
+}
+
+/* =========================================================
    Responsive
    ========================================================= */
 @media (max-width: 860px) {
@@ -1574,6 +1613,13 @@ section {
 
   .marquee-track .marquee-item {
     font-size: 0.95rem;
+  }
+
+  .whatsapp-float {
+    bottom: 18px;
+    right: 18px;
+    width: 50px;
+    height: 50px;
   }
 }
 
