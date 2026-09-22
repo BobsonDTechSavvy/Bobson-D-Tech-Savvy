@@ -1,8 +1,9 @@
 /* =========================================================
    Francis Bobson Hinckley — Portfolio Scripts
    Handles: smooth fade-out on internal link clicks, footer
-   year, mobile nav toggle, and the About page auto-advancing
-   image slideshow (5s per slide, #aboutSlides).
+   year, mobile nav toggle, the About page auto-advancing
+   image slideshow (5s per slide, #aboutSlides), scroll
+   progress bar, and the Formspree-powered contact form.
    ========================================================= */
 
 // ---- Smooth page transitions ----
@@ -131,32 +132,31 @@ document.addEventListener('DOMContentLoaded', () => {
     updateProgress();
   }
 
-  // ---- Contact form (no backend — opens the visitor's email app) ----
-  // Formspree needs a real form ID to actually deliver mail; since this
-  // site has no backend of its own, submitting instead opens the
-  // visitor's default email app with the message pre-filled and
-  // addressed to Francis directly, so "Send Message" reliably works.
+  // ---- Contact form (Formspree — sends real email, no mail-app popup) ----
   const contactForm = document.getElementById('contactForm');
   const formStatus = document.getElementById('formStatus');
 
   if (contactForm) {
-    contactForm.addEventListener('submit', (event) => {
+    contactForm.addEventListener('submit', async (event) => {
       event.preventDefault();
 
-      const to = contactForm.dataset.mailto;
-      const name = contactForm.name.value.trim();
-      const email = contactForm.email.value.trim();
-      const message = contactForm.message.value.trim();
+      if (formStatus) formStatus.textContent = 'Sending…';
 
-      const subject = encodeURIComponent(`Portfolio contact from ${name || 'website visitor'}`);
-      const body = encodeURIComponent(
-        `${message}\n\n— ${name}${email ? ` (${email})` : ''}`
-      );
+      try {
+        const response = await fetch(contactForm.action, {
+          method: 'POST',
+          body: new FormData(contactForm),
+          headers: { 'Accept': 'application/json' }
+        });
 
-      window.location.href = `mailto:${to}?subject=${subject}&body=${body}`;
-
-      if (formStatus) {
-        formStatus.textContent = 'Opening your email app to send this message…';
+        if (response.ok) {
+          if (formStatus) formStatus.textContent = "Thanks! Your message has been sent — I'll get back to you soon.";
+          contactForm.reset();
+        } else {
+          if (formStatus) formStatus.textContent = 'Something went wrong. Please try emailing me directly instead.';
+        }
+      } catch (err) {
+        if (formStatus) formStatus.textContent = 'Something went wrong. Please try emailing me directly instead.';
       }
     });
   }
