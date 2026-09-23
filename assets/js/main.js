@@ -2,8 +2,8 @@
    Francis Bobson Hinckley — Portfolio Scripts
    Handles: smooth fade-out on internal link clicks, footer
    year, mobile nav toggle, the About page auto-advancing
-   image slideshow (5s per slide, #aboutSlides), scroll
-   progress bar, and the Formspree-powered contact form.
+   image slideshow (5s per slide, #aboutSlides), and the
+   scroll progress bar.
    ========================================================= */
 
 // ---- Smooth page transitions ----
@@ -132,35 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
     updateProgress();
   }
 
-  // ---- Contact form (Formspree — sends real email, no mail-app popup) ----
-  const contactForm = document.getElementById('contactForm');
-  const formStatus = document.getElementById('formStatus');
-
-  if (contactForm) {
-    contactForm.addEventListener('submit', async (event) => {
-      event.preventDefault();
-
-      if (formStatus) formStatus.textContent = 'Sending…';
-
-      try {
-        const response = await fetch(contactForm.action, {
-          method: 'POST',
-          body: new FormData(contactForm),
-          headers: { 'Accept': 'application/json' }
-        });
-
-        if (response.ok) {
-          if (formStatus) formStatus.textContent = "Thanks! Your message has been sent — I'll get back to you soon.";
-          contactForm.reset();
-        } else {
-          if (formStatus) formStatus.textContent = 'Something went wrong. Please try emailing me directly instead.';
-        }
-      } catch (err) {
-        if (formStatus) formStatus.textContent = 'Something went wrong. Please try emailing me directly instead.';
-      }
-    });
-  }
-
   // ---- Smooth scroll-reveal (fade + rise) across all pages ----
   const revealSelectors = [
     '.hero-text', '.hero-image',
@@ -168,7 +139,7 @@ document.addEventListener('DOMContentLoaded', () => {
     '.skill-card',
     '.timeline-item',
     '.bio-text', '.bio-slideshow',
-    '.contact-details', '.contact-form-wrapper',
+    '.contact-details',
     '.globe-arc-band',
     '.cta .container > *',
     '.page-header .container > *'
