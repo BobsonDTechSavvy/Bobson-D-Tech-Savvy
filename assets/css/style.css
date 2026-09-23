@@ -1183,13 +1183,23 @@ section {
 }
 
 /* =========================================================
-   Contact page — split layout (info + form card)
+   Contact page — details column
+   The layout used to be a two-column split with a form
+   alongside .contact-details. The form has been removed, so
+   .contact-split-solo caps the remaining column's width and
+   centers it instead of stretching it across the full row.
    ========================================================= */
 .contact-split {
   display: grid;
   grid-template-columns: 1fr 1.1fr;
   gap: var(--space-5);
   align-items: stretch;
+}
+
+.contact-split-solo {
+  grid-template-columns: 1fr;
+  max-width: 640px;
+  margin: 0 auto;
 }
 
 .contact-info .lede {
@@ -1235,8 +1245,6 @@ section {
 
 /* Support for the simpler two-column layout (.bio-inner) used on Contact */
 .contact-details {
-  /* matches .contact-form-wrapper's padding-top so both columns'
-     headings start at the same vertical offset */
   padding-top: var(--space-4);
 }
 
@@ -1253,19 +1261,6 @@ section {
 }
 
 .contact-details h2 {
-  margin-bottom: var(--space-2);
-}
-
-.contact-form-wrapper {
-  background: var(--bg-elevated);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  padding: var(--space-4);
-  box-shadow: var(--shadow-md);
-  height: 100%;
-}
-
-.contact-form-wrapper h2 {
   margin-bottom: var(--space-2);
 }
 
@@ -1290,114 +1285,8 @@ section {
   font-style: italic;
 }
 
-.contact-form-card {
-  background: var(--bg-elevated);
-  border: 1px solid var(--line);
-  border-radius: var(--radius-md);
-  padding: var(--space-4);
-  box-shadow: var(--shadow-md);
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: var(--space-2);
-}
-
-.contact-form {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-1);
-}
-
-.contact-form label {
-  font-size: 0.82rem;
-  font-weight: 700;
-  margin-top: var(--space-2);
-  color: var(--text);
-}
-
-.form-status {
-  min-height: 1.2em;
-  margin: var(--space-2) 0 0;
-  font-size: 0.9rem;
-  color: var(--accent);
-}
-
-.contact-form input,
-.contact-form select,
-.contact-form textarea {
-  font-family: var(--font-body);
-  font-size: 0.95rem;
-  padding: 0.85rem 1rem;
-  border: 1px solid var(--line);
-  border-radius: var(--radius-sm);
-  background: var(--bg);
-  color: var(--text);
-  transition: border-color 0.18s var(--ease), box-shadow 0.18s var(--ease);
-}
-
-.contact-form select {
-  appearance: none;
-  background-image: linear-gradient(45deg, transparent 50%, var(--text) 50%), linear-gradient(135deg, var(--text) 50%, transparent 50%);
-  background-position: calc(100% - 18px) center, calc(100% - 13px) center;
-  background-size: 5px 5px, 5px 5px;
-  background-repeat: no-repeat;
-}
-
-.contact-form input::placeholder,
-.contact-form textarea::placeholder {
-  color: var(--text-faint);
-}
-
-.contact-form input:focus,
-.contact-form select:focus,
-.contact-form textarea:focus {
-  border-color: var(--accent);
-  box-shadow: 0 0 0 3px var(--accent-glow);
-}
-
-.btn-send {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  width: 100%;
-  margin-top: var(--space-3);
-  padding: 1rem;
-  border: none;
-  border-radius: var(--radius-pill);
-  background: linear-gradient(90deg, var(--accent), var(--accent-deep));
-  color: var(--white);
-  font-family: var(--font-head);
-  font-weight: 700;
-  font-size: 1rem;
-  box-shadow: 0 4px 16px var(--accent-glow);
-  transition: filter 0.18s var(--ease), transform 0.18s var(--ease);
-}
-
-.btn-send:hover {
-  filter: brightness(1.1);
-  transform: translateY(-1px);
-}
-
-.btn-send:active {
-  transform: translateY(0);
-}
-
-.form-caption {
-  margin: var(--space-2) 0 0;
-  text-align: center;
-  font-size: 0.78rem;
-  color: var(--text-faint);
-}
-
 @media (max-width: 860px) {
   .contact-split {
-    grid-template-columns: 1fr;
-  }
-
-  .form-row {
     grid-template-columns: 1fr;
   }
 }
@@ -1491,13 +1380,15 @@ section {
 
 /* =========================================================
    WhatsApp floating button
+   Resized down (56px → 44px) and nudged up slightly
+   (bottom 24px → 34px) per request.
    ========================================================= */
 .whatsapp-float {
   position: fixed;
-  bottom: 24px;
+  bottom: 34px;
   right: 24px;
-  width: 56px;
-  height: 56px;
+  width: 44px;
+  height: 44px;
   background: #25D366;
   border-radius: 50%;
   display: flex;
@@ -1616,10 +1507,10 @@ section {
   }
 
   .whatsapp-float {
-    bottom: 18px;
+    bottom: 28px;
     right: 18px;
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
   }
 }
 
