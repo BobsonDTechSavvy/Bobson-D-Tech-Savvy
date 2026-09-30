@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Bobson D Tech Savvy</title>
   <link rel="icon" type="image/png" href="assets/images/Logo.png">
-  <link rel="stylesheet" href="assets/css/style.css?v=9">
+  <link rel="stylesheet" href="assets/css/style.css?v=10">
 </head>
 <body>
 
@@ -555,6 +555,29 @@
   <!-- ===== WhatsApp Floating Button ===== -->
   <style>
     html, body { max-width: 100%; overflow-x: clip; }
+
+    /* Footer: icons centered and larger, with extra bottom room so the
+       floating WhatsApp button never sits on top of them */
+    .site-footer { padding: 40px 0 92px; }
+    .site-footer .footer-inner {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      gap: 24px;
+    }
+    .site-footer .footer-links {
+      order: -1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 24px;
+      margin: 0 auto;
+      padding: 0;
+    }
+    .site-footer .footer-icon { width: 46px; height: 46px; padding: 9px; }
 
     /* Desktop: pill with icon + "Chat on WhatsApp", bottom-right */
     .wa-fab {
