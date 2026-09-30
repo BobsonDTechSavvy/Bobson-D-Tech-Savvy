@@ -1379,68 +1379,6 @@ section {
 }
 
 /* =========================================================
-   WhatsApp floating button
-   Fixed to the right edge and vertically centered in the
-   viewport (top: 50% + translateY(-50%)), so it stays in the
-   middle of the screen while scrolling.
-   ========================================================= */
-.whatsapp-float {
-    position: fixed;
-    right: 24px;
-    top: 50%;
-    bottom: auto;
-    transform: translateY(-50%);
-
-    width: 58px;
-    height: 58px;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    background: #25D366;
-    color: #fff;
-    border-radius: 50%;
-
-    text-decoration: none;
-    z-index: 9999;
-
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
-
-    transition: transform 0.2s ease, box-shadow 0.2s ease;
-}
-
-.whatsapp-float svg {
-    width: 30px;
-    height: 30px;
-}
-
-/* Keep the vertical centering while scaling on hover */
-.whatsapp-float:hover {
-    transform: translateY(-50%) scale(1.08);
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.30);
-}
-
-/* =========================
-   MOBILE
-   ========================= */
-@media (max-width: 768px) {
-    .whatsapp-float {
-        width: 52px;
-        height: 52px;
-
-        right: 16px;
-        top: 50%;
-        bottom: auto;
-    }
-
-    .whatsapp-float svg {
-        width: 27px;
-        height: 27px;
-    }
-}
-
-/* =========================================================
    Responsive
    ========================================================= */
 @media (max-width: 860px) {
@@ -1536,19 +1474,6 @@ section {
   .marquee-track .marquee-item {
     font-size: 0.95rem;
   }
-
-  .whatsapp-float {
-    width: 52px;
-    height: 52px;
-    right: 16px;
-    top: 50%;
-    bottom: auto;
-  }
-
-  .whatsapp-float svg {
-    width: 27px;
-    height: 27px;
-  }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1558,89 +1483,10 @@ section {
 }
 
 /* =========================================================
-   WhatsApp button — FINAL OVERRIDE
-   Desktop: pill-shaped "Chat on WhatsApp" button, fixed in the
-   bottom-right corner. Mobile (<=768px): round icon-only button,
-   fixed in the bottom-right corner. No HTML change needed; the
-   label text is added with ::after and hidden on mobile.
-   ========================================================= */
-a.whatsapp-float,
-.whatsapp-float {
-  position: fixed !important;
-  left: auto !important;
-  top: auto !important;
-  right: 24px !important;
-  bottom: 24px !important;
-  transform: none !important;
-  z-index: 2147483000 !important;
-
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 10px !important;
-
-  width: auto !important;
-  height: 54px !important;
-  padding: 0 22px 0 18px !important;
-  border-radius: 999px !important;
-
-  background: #25D366 !important;
-  color: #fff !important;
-  font-family: var(--font-body);
-  font-size: 1.05rem;
-  font-weight: 600;
-  line-height: 1;
-  white-space: nowrap;
-  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35) !important;
-}
-
-a.whatsapp-float svg,
-.whatsapp-float svg {
-  width: 30px !important;
-  height: 30px !important;
-  flex-shrink: 0;
-}
-
-a.whatsapp-float::after,
-.whatsapp-float::after {
-  content: "Chat on WhatsApp";
-}
-
-a.whatsapp-float:hover,
-.whatsapp-float:hover {
-  transform: translateY(-2px) !important;
-  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4) !important;
-}
-
-@media (max-width: 768px) {
-  a.whatsapp-float,
-  .whatsapp-float {
-    width: 56px !important;
-    height: 56px !important;
-    padding: 0 !important;
-    gap: 0 !important;
-    right: 16px !important;
-    bottom: calc(24px + env(safe-area-inset-bottom)) !important;
-    border-radius: 50% !important;
-  }
-
-  a.whatsapp-float::after,
-  .whatsapp-float::after {
-    content: none;
-    display: none;
-  }
-
-  a.whatsapp-float:hover,
-  .whatsapp-float:hover {
-    transform: scale(1.05) !important;
-  }
-}
-
-/* =========================================================
    Horizontal overflow fix (mobile)
    Off-screen slides (translateX(60px)) and other wide items
    were making the page wider than the phone screen, which
-   pushed the fixed WhatsApp button partly off the right edge.
+   pushed fixed-position elements partly off the right edge.
    Clipping the overflow keeps the layout exactly screen-wide.
    ========================================================= */
 html,
