@@ -1,4 +1,4 @@
-/* =========================================================
+/*  =========================================================
    Francis Bobson Hinckley — Portfolio Stylesheet
    Dark theme: blue-black background, white text, red accent.
    Refined pass: consistent radius scale, layered shadows,
@@ -1380,13 +1380,16 @@ section {
 
 /* =========================================================
    WhatsApp floating button
-   Resized down (56px → 44px) and nudged up slightly
-   (bottom 24px → 34px) per request.
+   Fixed to the right edge and vertically centered in the
+   viewport (top: 50% + translateY(-50%)), so it stays in the
+   middle of the screen while scrolling.
    ========================================================= */
 .whatsapp-float {
     position: fixed;
     right: 24px;
-    bottom: 24px;
+    top: 50%;
+    bottom: auto;
+    transform: translateY(-50%);
 
     width: 58px;
     height: 58px;
@@ -1412,8 +1415,9 @@ section {
     height: 30px;
 }
 
+/* Keep the vertical centering while scaling on hover */
 .whatsapp-float:hover {
-    transform: scale(1.08);
+    transform: translateY(-50%) scale(1.08);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.30);
 }
 
@@ -1426,7 +1430,8 @@ section {
         height: 52px;
 
         right: 16px;
-        bottom: 18px;
+        top: 50%;
+        bottom: auto;
     }
 
     .whatsapp-float svg {
@@ -1434,6 +1439,7 @@ section {
         height: 27px;
     }
 }
+
 /* =========================================================
    Responsive
    ========================================================= */
@@ -1531,17 +1537,18 @@ section {
     font-size: 0.95rem;
   }
 
- .whatsapp-float {
+  .whatsapp-float {
     width: 52px;
     height: 52px;
     right: 16px;
-    bottom: calc(18px + env(safe-area-inset-bottom));
-}
+    top: 50%;
+    bottom: auto;
+  }
 
-.whatsapp-float svg {
+  .whatsapp-float svg {
     width: 27px;
     height: 27px;
-}
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
