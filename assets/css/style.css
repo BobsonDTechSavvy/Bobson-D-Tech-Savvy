@@ -1558,25 +1558,58 @@ section {
 }
 
 /* =========================================================
-   WhatsApp button — FINAL OVERRIDE (must stay at the end)
-   Desktop: fixed, vertically centered on the right edge.
-   Mobile (<=768px): fixed floating button in the bottom-right
-   corner of the screen (not in the footer), like the reference.
+   WhatsApp button — FINAL OVERRIDE
+   Desktop: pill-shaped "Chat on WhatsApp" button, fixed in the
+   bottom-right corner. Mobile (<=768px): round icon-only button,
+   fixed in the bottom-right corner. No HTML change needed; the
+   label text is added with ::after and hidden on mobile.
    ========================================================= */
 a.whatsapp-float,
 .whatsapp-float {
   position: fixed !important;
   left: auto !important;
+  top: auto !important;
   right: 24px !important;
-  top: 50% !important;
-  bottom: auto !important;
-  transform: translateY(-50%) !important;
+  bottom: 24px !important;
+  transform: none !important;
   z-index: 2147483000 !important;
+
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 10px !important;
+
+  width: auto !important;
+  height: 54px !important;
+  padding: 0 22px 0 18px !important;
+  border-radius: 999px !important;
+
+  background: #25D366 !important;
+  color: #fff !important;
+  font-family: var(--font-body);
+  font-size: 1.05rem;
+  font-weight: 600;
+  line-height: 1;
+  white-space: nowrap;
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.35) !important;
+}
+
+a.whatsapp-float svg,
+.whatsapp-float svg {
+  width: 30px !important;
+  height: 30px !important;
+  flex-shrink: 0;
+}
+
+a.whatsapp-float::after,
+.whatsapp-float::after {
+  content: "Chat on WhatsApp";
 }
 
 a.whatsapp-float:hover,
 .whatsapp-float:hover {
-  transform: translateY(-50%) scale(1.08) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 10px 24px rgba(0, 0, 0, 0.4) !important;
 }
 
 @media (max-width: 768px) {
@@ -1584,16 +1617,17 @@ a.whatsapp-float:hover,
   .whatsapp-float {
     width: 56px !important;
     height: 56px !important;
+    padding: 0 !important;
+    gap: 0 !important;
     right: 16px !important;
-    top: auto !important;
     bottom: calc(24px + env(safe-area-inset-bottom)) !important;
-    transform: none !important;
+    border-radius: 50% !important;
   }
 
-  a.whatsapp-float svg,
-  .whatsapp-float svg {
-    width: 30px !important;
-    height: 30px !important;
+  a.whatsapp-float::after,
+  .whatsapp-float::after {
+    content: none;
+    display: none;
   }
 
   a.whatsapp-float:hover,
