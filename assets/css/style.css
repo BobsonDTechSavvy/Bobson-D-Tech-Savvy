@@ -1559,16 +1559,17 @@ section {
 
 /* =========================================================
    WhatsApp button — FINAL OVERRIDE (must stay at the end)
-   Forces vertical centering on the right edge on every
-   screen size, overriding any older rules or inline CSS.
+   Desktop: fixed, vertically centered on the right edge.
+   Mobile (<=768px): fixed floating button in the bottom-right
+   corner of the screen (not in the footer), like the reference.
    ========================================================= */
 a.whatsapp-float,
 .whatsapp-float {
   position: fixed !important;
+  left: auto !important;
+  right: 24px !important;
   top: 50% !important;
   bottom: auto !important;
-  left: auto !important;
-  right: 16px !important;
   transform: translateY(-50%) !important;
   z-index: 2147483000 !important;
 }
@@ -1578,9 +1579,25 @@ a.whatsapp-float:hover,
   transform: translateY(-50%) scale(1.08) !important;
 }
 
-@media (min-width: 769px) {
+@media (max-width: 768px) {
   a.whatsapp-float,
   .whatsapp-float {
-    right: 24px !important;
+    width: 56px !important;
+    height: 56px !important;
+    right: 16px !important;
+    top: auto !important;
+    bottom: calc(24px + env(safe-area-inset-bottom)) !important;
+    transform: none !important;
+  }
+
+  a.whatsapp-float svg,
+  .whatsapp-float svg {
+    width: 30px !important;
+    height: 30px !important;
+  }
+
+  a.whatsapp-float:hover,
+  .whatsapp-float:hover {
+    transform: scale(1.05) !important;
   }
 }
