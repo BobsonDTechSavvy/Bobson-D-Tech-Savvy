@@ -1601,3 +1601,22 @@ a.whatsapp-float:hover,
     transform: scale(1.05) !important;
   }
 }
+
+/* =========================================================
+   Horizontal overflow fix (mobile)
+   Off-screen slides (translateX(60px)) and other wide items
+   were making the page wider than the phone screen, which
+   pushed the fixed WhatsApp button partly off the right edge.
+   Clipping the overflow keeps the layout exactly screen-wide.
+   ========================================================= */
+html,
+body {
+  max-width: 100%;
+  overflow-x: clip;
+}
+
+.slides,
+.bio-slideshow,
+.page-section {
+  overflow: hidden;
+}
