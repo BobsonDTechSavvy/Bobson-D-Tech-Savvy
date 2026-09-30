@@ -1556,3 +1556,31 @@ section {
     transition: opacity 0.01s linear, visibility 0.01s linear !important;
   }
 }
+
+/* =========================================================
+   WhatsApp button — FINAL OVERRIDE (must stay at the end)
+   Forces vertical centering on the right edge on every
+   screen size, overriding any older rules or inline CSS.
+   ========================================================= */
+a.whatsapp-float,
+.whatsapp-float {
+  position: fixed !important;
+  top: 50% !important;
+  bottom: auto !important;
+  left: auto !important;
+  right: 16px !important;
+  transform: translateY(-50%) !important;
+  z-index: 2147483000 !important;
+}
+
+a.whatsapp-float:hover,
+.whatsapp-float:hover {
+  transform: translateY(-50%) scale(1.08) !important;
+}
+
+@media (min-width: 769px) {
+  a.whatsapp-float,
+  .whatsapp-float {
+    right: 24px !important;
+  }
+}
